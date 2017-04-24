@@ -1,10 +1,10 @@
 package com.top.ebean;
 
-import com.avaje.ebean.Ebean;
-import com.avaje.ebean.cache.ServerCache;
-import com.avaje.ebean.cache.ServerCacheManager;
 import com.top.ebean.domain.EFoo;
 import com.top.ebean.j2cache.J2EbeanCache;
+import io.ebean.Ebean;
+import io.ebean.cache.ServerCache;
+import io.ebean.cache.ServerCacheManager;
 
 public class J2EbeanCacheFactoryTest {
 

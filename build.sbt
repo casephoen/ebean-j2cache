@@ -2,10 +2,10 @@ name := "ebean-j2cache"
 
 version := "1.0"
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.11.8"
 
 libraryDependencies ++= Seq(
-  "org.avaje.ebeanorm" % "avaje-ebeanorm" % "7.6.1",
+  "io.ebean" % "ebean" % "10.1.6",
   "de.ruedigermoeller" % "fst" % "2.42",
   "net.sf.ehcache" % "ehcache-core" % "2.6.11",
   //"org.slf4j" % "slf4j-api" % "1.7.22",

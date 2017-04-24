@@ -1,9 +1,10 @@
 package com.top.ebean.domain;
 
-import com.avaje.ebean.annotation.CacheStrategy;
+import io.ebean.annotation.Cache;
+
 import javax.persistence.Entity;
 
-@CacheStrategy
+@Cache
 @Entity
 public class EFoo extends EBase {
 

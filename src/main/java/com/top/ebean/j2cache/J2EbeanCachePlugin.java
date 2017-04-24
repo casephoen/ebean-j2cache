@@ -1,9 +1,9 @@
 package com.top.ebean.j2cache;
 
-import io.ebean.BackgroundExecutor;
-import io.ebean.cache.ServerCacheFactory;
-import io.ebean.cache.ServerCachePlugin;
-import io.ebean.config.ServerConfig;
+import com.avaje.ebean.BackgroundExecutor;
+import com.avaje.ebean.cache.ServerCacheFactory;
+import com.avaje.ebean.cache.ServerCachePlugin;
+import com.avaje.ebean.config.ServerConfig;
 
 /**
  * Created by lizhijun on 2017/4/6.

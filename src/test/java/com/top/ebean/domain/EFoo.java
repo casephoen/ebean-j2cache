@@ -1,6 +1,6 @@
 package com.top.ebean.domain;
 
-import io.ebean.annotation.Cache;
+import com.avaje.ebean.annotation.Cache;
 
 import javax.persistence.Entity;
 

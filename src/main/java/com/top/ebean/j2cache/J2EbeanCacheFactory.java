@@ -1,9 +1,9 @@
 package com.top.ebean.j2cache;
 
-import io.ebean.cache.ServerCache;
-import io.ebean.cache.ServerCacheFactory;
-import io.ebean.cache.ServerCacheOptions;
-import io.ebean.cache.ServerCacheType;
+import com.avaje.ebean.cache.ServerCache;
+import com.avaje.ebean.cache.ServerCacheFactory;
+import com.avaje.ebean.cache.ServerCacheOptions;
+import com.avaje.ebean.cache.ServerCacheType;
 import net.oschina.j2cache.J2Cache;
 
 /**

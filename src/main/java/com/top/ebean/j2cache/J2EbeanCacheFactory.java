@@ -20,7 +20,7 @@ public class J2EbeanCacheFactory implements ServerCacheFactory {
 
     @Override
     public ServerCache createCache(ServerCacheType type, String cacheKey, ServerCacheOptions cacheOptions) {
-        ServerCache cache = new J2EbeanCache(type, cacheKey, J2Cache.getChannel());
+        ServerCache cache = new J2EbeanCache(type, cacheKey, cacheOptions, J2Cache.getChannel());
         cache.init(ebeanServer);
         return cache;
     }

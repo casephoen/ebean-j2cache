@@ -17,9 +17,10 @@ public class J2EbeanCache implements ServerCache {
     private final static Logger log = LoggerFactory.getLogger(J2EbeanCache.class);
     protected ServerCacheType type;
     protected String name;
+    protected ServerCacheOptions cacheOptions;
     protected CacheChannel cache;
 
-    public J2EbeanCache(ServerCacheType type, String name, CacheChannel cache) {
+    public J2EbeanCache(ServerCacheType type, String name, ServerCacheOptions cacheOptions, CacheChannel cache) {
         this.type = type;
         switch (this.type) {
             case NATURAL_KEY:
@@ -31,6 +32,7 @@ public class J2EbeanCache implements ServerCache {
             default:
                 this.name = name;
         }
+        this.cacheOptions = cacheOptions;
         this.cache = cache;
     }
 
@@ -46,10 +48,11 @@ public class J2EbeanCache implements ServerCache {
     @Override
     public Object put(Object id, Object value) {
         if (log.isDebugEnabled()) {
-            log.debug("set put the key to j2cache which region:{} key:{} type:{}", name, id, type);
+            log.debug("set the key to j2cache which region:{} key:{} type:{}", name, id, type);
         }
-        if (ServerCacheType.QUERY == type)
-            cache.set(name, id, value, 600);
+        int maxSecsToLive = cacheOptions.getMaxSecsToLive();
+        if (maxSecsToLive > 0)
+            cache.set(name, id, value, maxSecsToLive);
         else
             cache.set(name, id, value);
         return value;//be care
@@ -91,11 +94,11 @@ public class J2EbeanCache implements ServerCache {
 
     @Override
     public ServerCacheOptions getOptions() {
-        return null;
+        return this.cacheOptions;
     }
 
     @Override
     public void setOptions(ServerCacheOptions options) {
-
+        this.cacheOptions = options;
     }
 }

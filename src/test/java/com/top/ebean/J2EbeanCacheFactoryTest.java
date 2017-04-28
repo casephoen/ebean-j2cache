@@ -5,7 +5,13 @@ import com.avaje.ebean.cache.ServerCache;
 import com.avaje.ebean.cache.ServerCacheManager;
 import com.top.ebean.domain.EFoo;
 import com.top.ebean.j2cache.J2EbeanCache;
+import org.junit.Test;
 
+import java.util.List;
+
+/*
+ * 执行需加agent库：java -javaagent:yourPath\avaje-ebeanorm-agent-8.1.1.jar
+ */
 public class J2EbeanCacheFactoryTest {
 
     public static void main(String[] args) throws InterruptedException {
@@ -15,8 +21,8 @@ public class J2EbeanCacheFactoryTest {
         test.queryCache();
     }
 
+    @Test
     public void integration() {
-
         ServerCacheManager cacheManager = Ebean.getServerCacheManager();
         ServerCache beanCache = cacheManager.getBeanCache(EFoo.class);
 
@@ -29,10 +35,11 @@ public class J2EbeanCacheFactoryTest {
     }
 
 
+    @Test
     public void putGet() throws InterruptedException {
 
         EFoo foo = new EFoo("hello");
-        foo.save();
+        Ebean.save(foo);
 
         EFoo fetch1 = Ebean.find(EFoo.class)
                 .setId(foo.getId())
@@ -50,7 +57,7 @@ public class J2EbeanCacheFactoryTest {
         EFoo update = new EFoo();
         update.setId(foo.getId());
         update.setNotes("ModNotes");
-        update.update();
+        Ebean.update(update);
 
         Thread.sleep(20);
 
@@ -64,6 +71,7 @@ public class J2EbeanCacheFactoryTest {
         System.out.println(fetch3.getName() + " hello");
     }
 
+    @Test
     public void queryCache() {
 
         new EFoo("one1").save();
@@ -92,5 +100,7 @@ public class J2EbeanCacheFactoryTest {
                 .where().startsWith("name", "one")
                 .findList();
 
+        List<EFoo> list = Ebean.find(EFoo.class).findList();
+        System.out.println(list);
     }
 }

@@ -29,28 +29,26 @@ public class J2EbeanCache implements ServerCache {
     @Override
     public Object get(Object id) {
         CacheObject obj = cache.get(name, id);
-        if (log.isDebugEnabled()) {
-            log.debug("get value for j2cache which region:{} key:{} value:{}", name, id, obj.getValue());
-        }
+        log.debug("{} GET {}({}) => {}", type, name, id, obj.getValue());
         return obj.getValue();
     }
 
     @Override
     public Object put(Object id, Object value) {
-        if (log.isDebugEnabled()) {
-            log.debug("set the key to j2cache which region:{} key:{} type:{}", name, id, type);
-        }
         int maxSecsToLive = cacheOptions.getMaxSecsToLive();
-        if (maxSecsToLive > 0)
+        if (maxSecsToLive > 0) {
+            log.debug("{} PUT {}({}) {}s", type, name, id, maxSecsToLive);
             cache.set(name, id, value, maxSecsToLive);
-        else
+        } else {
+            log.debug("{} PUT {}({})", type, name, id);
             cache.set(name, id, value);
+        }
         return value;//be care
     }
 
     @Override
     public Object remove(Object id) {
-        log.info("remove key from j2cache which region:{} key:{}", name, id);
+        log.debug("{} DEL {}({})", type, name, id);
         cache.evict(name, id);
         return null;//be care
     }
@@ -58,12 +56,13 @@ public class J2EbeanCache implements ServerCache {
     @Override
     public int size() {
         int size = cache.keys(name).size();
-        log.info("get LEVEL_1 ElementCountInMemory which size" + size);
+        log.debug("{} SIZE {} of LEVEL_1 ElementCountInMemory", size);
         return size;
     }
 
     @Override
     public void clear() {
+        log.debug("{} CLEAR {}", type, name);
         cache.clear(name);
     }
 

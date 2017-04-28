@@ -2,9 +2,12 @@ package com.top.ebean.domain;
 
 import com.avaje.ebean.annotation.Cache;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.List;
 
-@Cache
+@Cache(enableQueryCache=true)
 @Entity
 public class EFoo extends EBase {
 
@@ -19,6 +22,9 @@ public class EFoo extends EBase {
     String name;
 
     String notes;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    List<EBar> barList;
 
     public EFoo() {
     }
